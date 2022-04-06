@@ -1,18 +1,19 @@
 /*
-message - входящее сообщение
-input = {P: , Q: }
+params = {message: входящее сообщение, N: число}
+
+rezult = {}, где
+message - первоначальное сообщение; message_num - закодированные буквы сообщения числами от 0 до 32;
+encode - закодированное сообщение; decode - раскодированное сообщение в буквах
 */
 
-function methods3(message, input){
-    let rezult = RSA(message, input);
+function methods3(params){
+    let rezult = RSA(params);
     return rezult;
 }
-function RSA(message, input){
-    //пользователь В:
+function RSA(params){
     //подготовка ключей
-    let N = input.P * input.Q;
-    let phi_N = eilerFunction(N);
-    
+    let phi_N = eilerFunction(params.N);
+
     //выплывающее окно с вопросом об открытом ключе
     let Kb;
     do {
@@ -26,7 +27,7 @@ function RSA(message, input){
     let t = [];
 
     let i = 0;
-    while(u[2] != 1) {
+    while(v[2] != 0) {
         q = parseInt(u[2] / v[2]);
         
         t = [u[0] - (v[0] * q), u[1] - (v[1] * q), u[2] - (v[2] * q)];
@@ -36,37 +37,29 @@ function RSA(message, input){
         
         i++
     }
-
-    //let count1 = (Kb * u[0] + phi_N * u[1]) % phi_N;
+    
     let kb = u[0] % phi_N;
     
-    let encode_message = messageEncryption(message, N, Kb);
-    let decode_message = messageEncryption(encode_message, N, kb);
-
-    return {encode: encode_message, decode: decode_message};
+    let encode_message = messageEncryption(codingLetters(params.message), params.N, Kb);
+    let decode_message = messageEncryption(encode_message, params.N, kb, 1);
+    
+    return {message: params.message.split(''), message_num: codingLetters(params.message), encode: encode_message, decode: decode_message};
 }
-function messageEncryption(message, N, Kb){
-    //предположим, что числа вводятся через пробел
-    let M = message.split(' ');
-    let C = '';
+function messageEncryption(message, N, Kb, code = 0){
+    let M = message; //массив с числами и символами
+    let C = [];
     
     for (let i = 0; i < M.length; i++){
-        C = C + (Math.pow(parseInt(M[i]), Kb) % N).toString();
-        
-        if(i < M.length - 1) { C = C + ' '; }
+        if(typeof M[i] == 'number') {
+            C.push((Math.pow(parseInt(M[i]), Kb) % N));
+        } else { C.push(M[i]); }
+    }
+    
+    if(code == 1){
+        C = codingLetters(C, 1);
     }
 
     return C;
-}
-function eilerFunction(N){ 
-    let phi = 0;
-    for (let i = 1; i < N; i++){
-        if(NOD([N, i]) == 1) {
-            phi++;
-        }
-    }
-
-    return phi;
 }
 function NOD(A){   
     let n = A.length;
@@ -79,6 +72,60 @@ function NOD(A){
     }
     
     return x;
+}
+function codingLetters(message, code = 0){
+    let alphabet = ' abcdefghijklmnopqrstuvwxyz'.split('');
+    let code_message = [];
+    let mess;
+    
+    //во второй раз message приходит массивом чисел
+    if(typeof message == 'string'){
+        mess = (message.toLowerCase()).split('').slice(0);
+    } else { mess = message.slice(0); }
+    
+    if(code == 0){
+        for(let i = 0; i < mess.length; i++){
+            let buf = 0;
+            for(let j = 0; j < alphabet.length; j++){
+                if(mess[i] == alphabet[j]){
+                    code_message.push(j);
+                    buf = 1;
+                    break;
+                }
+            }
+            if(buf == 0){
+                code_message.push(mess[i]);
+                buf = 0;
+            }
+        }
+    } else {
+        for(let i = 0; i < mess.length; i++){
+            let buf = 0;
+            for(let j = 0; j < alphabet.length; j++){
+                if(mess[i] == j){
+                    code_message.push(alphabet[j]);
+                    buf = 1;
+                    break;
+                }
+            }
+            if(buf == 0){
+                code_message.push(mess[i]);
+                buf = 0;
+            }
+        }
+    }
+    
+    return code_message;
+}
+function eilerFunction(N){ 
+    let phi = 0;
+    for (let i = 1; i < N; i++){
+        if(NOD([N, i]) == 1) {
+            phi++;
+        }
+    }
+
+    return phi;
 }
 
 export default methods3;
