@@ -1,16 +1,16 @@
 <template>
   <div class="ans">
       <div class="mes_text d">
-        <label v-for="(item, index) in text.m1" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+        <label v-for="(item, index) in text.message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
       <div class="mes_bit d">
-        <label v-for="(item, index) in text.m2" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+        <label v-for="(item, index) in text.binary_message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
       <div class="shifr_text d">
-        <label v-for="(item, index) in text.m3" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+        <label v-for="(item, index) in text.encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div >
       <div class="shifr_bit d">
-        <label v-for="(item, index) in text.m4" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+        <label v-for="(item, index) in text.binary_encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div >
     </div>
 </template>

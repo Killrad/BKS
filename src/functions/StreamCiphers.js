@@ -7,13 +7,6 @@ params = {message: входное сообщение, A: целое число, 
  encode: закодированное сообщение, binary_encode: каждый символ закодированного сообщения - двоичное число};
 */
 
-function methods1(params){
-
-    let rezult1 = SynchronousStreamCipher(params);
-    let rezult2 = AsynchronousStreamCipher(params);
-
-    return {synch: rezult1, asynch: rezult2};
-}
 
 function SynchronousStreamCipher(params){
     let inc = []; //символы открытого текста
@@ -204,4 +197,11 @@ function description_nonGraphic_symbols(num){
     return rezult;
 }
 
+
+
+
+const methods1 = {
+    Sync: SynchronousStreamCipher,
+    Async: AsynchronousStreamCipher,
+}
 export default methods1;

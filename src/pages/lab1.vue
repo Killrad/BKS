@@ -22,10 +22,10 @@
             <formSwitch v-model:value="inputs.asyncM" labelText="Асинхронный"/>
             <formInput v-if="inputs.asyncM" :reference="true" textTooltip="Шаг с которого считается Гамма штрих." v-model:value="inputs.T" :Width="30" labelText="T" :countWidthLine="100" :countWidth="100"/>
           </div>
-          <formButton buttonText="Зашифровать"/>
+          <formButton @click="clickButton" buttonText="Зашифровать"/>
         </div>
     </div>
-    <ans4div :text="sometext"/>
+    <ans4div v-if="ans" :text="sometext"/>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ import formInput from '../components/formInput.vue'
 import formButton from '../components/formButton.vue'
 import formSwitch from '../components/formSwitch.vue'
 import ans4div from '../components/ans4div.vue'
+import methods1 from '../functions/StreamCiphers.js'
 export default {
   name: 'lab1',
   components: {
@@ -46,44 +47,8 @@ export default {
   },
   data(){
     return {
-      sometext:{
-        m1:['1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3'],
-        m2:['11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',],
-        m3:['1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3',
-          '1','2','3'],
-        m4:['11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',
-        '11111111','22222222','33333333',],
-      },
+      sometext:{},
+      ans: false,
       inputs:{
         message:'',
         A:'',
@@ -93,6 +58,21 @@ export default {
         asyncM : false,
         T:''
       },
+    }
+  },
+  methods:{
+    clickButton(){
+        let params = {
+          message: this.inputs.message, A: this.inputs.A, B: this.inputs.B,
+          gamma0: this.inputs.Gamma, e: this.inputs.e, t: this.inputs.T
+        };
+        if (this.inputs.asyncM){
+          this.sometext = methods1.Async(params);
+        }
+        else{
+          this.sometext = methods1.Sync(params);
+        }
+        this.ans = true;
     }
   }
 }
