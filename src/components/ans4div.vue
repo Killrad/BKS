@@ -3,13 +3,13 @@
       <div class="mes_text d">
         <label v-for="(item, index) in text.message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
-      <div class="mes_bit d">
+      <div class="mes_bit d bin">
         <label v-for="(item, index) in text.binary_message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
-      <div class="shifr_text d">
+      <div class="shifr_text d ">
         <label v-for="(item, index) in text.encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div >
-      <div class="shifr_bit d">
+      <div class="shifr_bit d bin">
         <label v-for="(item, index) in text.binary_encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div >
     </div>
@@ -55,6 +55,13 @@ export default {
     transition: background 1s ease-out;
     transition: color 1s ease-out;
 }
+.bin label{
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+.bin{
+  padding: 0.25rem;
+}
 
 .ans div::-webkit-scrollbar {
   width: 10px;
@@ -74,13 +81,14 @@ export default {
 }
 
 .ans{
-  height: 350px;
+  height: 370px;
   overflow-x: hidden;
   padding-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-content: flex-start;
+  justify-content: center;
 }
 .d {
   background:  rgba(0,0,0,0.09);
@@ -90,8 +98,9 @@ export default {
   align-content: flex-start;
 }
 .ans .mes_text{
+  padding: 0.25rem;
   height: 170px;
-  width: 19%;
+  width: 30%;
   margin: 0px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -102,8 +111,9 @@ export default {
     border-top-left-radius: var(--border_radius);
 }
 .ans .mes_bit{
+  
   height: 170px;
-  width: 80%;
+  width: 60%;
   margin: 0px;
   margin-left: calc(-1*var(--border_width));
   
@@ -117,8 +127,9 @@ export default {
 
 }
 .ans .shifr_text{
+  padding: 0.25rem;
   height: 170px;
-  width: 19%;
+  width: 30%;
   margin: 0px;
   margin-top:calc(-1*var(--border_width));
   
@@ -131,8 +142,10 @@ export default {
     border-bottom-left-radius: var(--border_radius);
 }
 .ans .shifr_bit{
+  
+  
   height: 170px;
-  width: 80%;
+  width: 60%;
   
   margin: 0px;
   margin-top:calc(-1*var(--border_width));

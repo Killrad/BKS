@@ -20,7 +20,7 @@ function SynchronousStreamCipher(params){
   
     for(let i = 0; i < params.message.length; i++){
 
-        inc.push(params.message.charCodeAt(i).toString(2));
+        inc.push(params.message.charCodeAt(i).toString(2).padStart(16, '0'));
     
         tmp.push(String.fromCharCode(parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)));
         tmp1.push(check_nonGraphic_symbols(tmp[i]));
@@ -30,7 +30,7 @@ function SynchronousStreamCipher(params){
     
         //строка
         encode.push(tmp1[i]);
-        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2));
+        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2).padStart(16, '0'));
     }
   
     return {message: params.message.split(''), binary_message: inc, encode: encode, binary_encode: binary_encode};
@@ -47,7 +47,7 @@ function AsynchronousStreamCipher(params) {
     gamma.push(params.gamma0.charCodeAt(0).toString(2));
   
     for(let i = 0; i < params.message.length; i++){
-        inc.push(params.message.charCodeAt(i).toString(2));
+        inc.push(params.message.charCodeAt(i).toString(2).padStart(16, '0'));
     
         if(i >= params.t){
             let gamma_ = tmp[0].charCodeAt(0);
@@ -66,7 +66,7 @@ function AsynchronousStreamCipher(params) {
         }
     
         encode.push(tmp1[i]);
-        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2));
+        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2).padStart(16, '0'));
     }
   
     return {message: params.message.split(''), binary_message: inc, encode: encode, binary_encode: binary_encode};
