@@ -1,7 +1,7 @@
 <template>
    <div class="group" v-bind:style="'--width:'+Width+'%'">
       <div class="group_rows">
-         <textarea :value="value" @input="funcValidate" @blur="$emit('change')" v-bind:class="{error: error}" type="text" v-bind:style="'--width:'+countWidth+'%'"/>
+         <input :value="value" @input="funcValidate" @blur="$emit('change')" v-bind:class="{error: error}" type="text" v-bind:style="'--width:'+countWidth+'%'">
          <label>{{ labelText }}</label>
          <div v-if="reference" class="reference">
             <img v-show="visible_ref" src="../assets/question.svg">
@@ -9,14 +9,15 @@
          </div>
       </div>
       <a v-bind:style="'--width:'+countWidthLine+'%'"></a>
-      <p v-if="error">{{ textError }}</p>
+         <p v-if="error">{{ textError }}</p>
+      
    </div>
 </template>
 
 <script>
 
 export default {
-   name:'textInput',
+   name:'formInput',
    props: {
       labelText: String,
       reference: {
@@ -55,8 +56,9 @@ export default {
 <style scoped>
 
 .group {
-   width: var(--width);
+   height: 57px;
    margin: 1vh;
+   width: var(--width);
    position: relative;
    display: flex;
    flex-direction: column;
@@ -69,8 +71,7 @@ export default {
    width: 100%;
 }
 
-.group_rows textarea {
-   resize:none;
+.group_rows input {
    cursor: pointer;
    outline: none;
    display: block;
@@ -78,30 +79,13 @@ export default {
    border: solid 1px #f2f2f2;
    border-radius: 5px 5px 0px 0px;
    border-bottom-color: black;
-   border-bottom-width: 2px;
+   border-bottom-width: 1.5px;
    padding: 25px 15px 0px 15px;
    font-size: 20px;
    width: var(--width);
-   height: 105px;
+   height: 30px;
 }
 
-
-.group_rows textarea::-webkit-scrollbar {
-  width: 10px;
-}
-.group_rows textarea::-webkit-scrollbar-track {
-  background-color:#fff;
-  margin-block-start: 1vh;
-  margin-block-end: 1vh;
-  border-radius: 10px;
-}
-.group_rows textarea.section::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-.group_rows textarea::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color:#2e38ef;
-}
 a {
    display: inline-block;
    color: transparent;
@@ -133,11 +117,11 @@ a:after {
 }
 
 
-.group_rows textarea:hover {
+.group_rows input:hover {
    background: rgba(0,0,0,0.09);
 }
 
-.group_rows textarea:focus {
+.group_rows input:focus {
    outline:none;
    background: rgba(0,0,0,0.12);
    border-bottom-color: #2e38ef;
@@ -157,16 +141,17 @@ a:after {
    padding: 0px;
 }
 
-.form-group_rows textarea:valid + label,
-.form-group_rows textarea:focus + label {
+.group_rows input:valid + label,
+.group_rows input:focus + label {
   top: 0;
   font-size: 14px;
 }
 
 .reference {
-   position: relative;
+   position: absolute;
    display: inline-block;
-   margin: -3px 0px 0px -16px;
+   margin-left: calc(100% - 15px);
+   margin-top: -13px;
    height: 27px;
    width: 30px;
 }
