@@ -8,11 +8,11 @@
       <div class="input_div">
         <textInput labelText='Шифруемое сообщениe' v-model:value="inputs.message" :Width="70" :countWidthLine="100" :countWidth="100"/>
         <div class = "r_inp">
-        <formInput v-model:value="inputs.A" :Width="43" labelText="A" :reference="true" textTooltip="Переменная для асинхронного метода." :countWidthLine="100" :countWidth="100"/>
-        <formInput v-model:value="inputs.B" :Width="43" labelText="B" :reference="true" textTooltip="Переменная для асинхронного метода." :countWidthLine="100" :countWidth="100"/>
+        <formInput v-model:value="inputs.A" :Width="43" labelText="A" :reference="true" textTooltip="Коэффициент при gamma[i-1] для вычисления gamma[i]." :countWidthLine="100" :countWidth="100"/>
+        <formInput v-model:value="inputs.B" :Width="43" labelText="B" :reference="true" textTooltip="Свободный коэффициент, используемый для вычисления gamma[i]." :countWidthLine="100" :countWidth="100"/>
         
-        <formInput v-model:value="inputs.Gamma" :Width="43" labelText="Гамма" :reference="true" textTooltip="Переменная для асинхронного метода." :countWidthLine="100" :countWidth="100"/>
-        <formInput v-model:value="inputs.e" :Width="43" labelText="e" :reference="true" textTooltip="Переменная для асинхронного метода." :countWidthLine="100" :countWidth="100"/>
+        <formInput v-model:value="inputs.Gamma" :Width="43" labelText="Гамма" :reference="true" textTooltip="Начальное значение, используемое для вычисления последующих gamma[i] для шифрования i-символа." :countWidthLine="100" :countWidth="100"/>
+        <formInput v-model:value="inputs.e" :Width="43" labelText="e" :reference="true" textTooltip="Модуль, по которому производится вычисление промежуточных gamma[i]." :countWidthLine="100" :countWidth="100"/>
         
         
         </div>
@@ -20,7 +20,7 @@
         <div class="inp_div">
           <div class="inp_var">
             <formSwitch v-model:value="inputs.asyncM" labelText="Асинхронный"/>
-            <formInput v-if="inputs.asyncM" :reference="true" textTooltip="Шаг с которого считается Гамма штрих." v-model:value="inputs.T" :Width="30" labelText="T" :countWidthLine="100" :countWidth="100"/>
+            <formInput v-if="inputs.asyncM" :reference="true" textTooltip="Номер шага, с которого вычисляется дополнительное gamma'[i]." v-model:value="inputs.T" :Width="30" labelText="T" :countWidthLine="100" :countWidth="100"/>
           </div>
           <formButton @click="clickButton" buttonText="Зашифровать"/>
         </div>
