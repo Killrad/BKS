@@ -30,7 +30,7 @@ function SynchronousStreamCipher(params){
     
         //строка
         encode.push(tmp1[i]);
-        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2).padStart(16, '0'));
+        binary_encode.push(tmp1[i].charCodeAt(0).toString(2).padStart(16, '0'));
     }
   
     return {message: params.message.split(''), binary_message: inc, encode: encode, binary_encode: binary_encode};
@@ -66,7 +66,7 @@ function AsynchronousStreamCipher(params) {
         }
     
         encode.push(tmp1[i]);
-        binary_encode.push((parseInt(inc[i], 2) ^ parseInt(gamma[i], 2)).toString(2).padStart(16, '0'));
+        binary_encode.push(tmp1[i].charCodeAt(0).toString(2).padStart(16, '0'));
     }
   
     return {message: params.message.split(''), binary_message: inc, encode: encode, binary_encode: binary_encode};
