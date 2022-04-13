@@ -1,23 +1,27 @@
 <template>
   <div class="ans">
-      <div class="mes_text d">
+    <div class="ans_row">
+      <div class="mes_text d" v-bind:style="'--width:'+lw+'%'">
         <label v-for="(item, index) in text.message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
-      <div class="mes_bit d bin">
+      <div class="mes_bit d bin" v-bind:style="'--width:'+lw+'%;--fs:'+rt+'rem;'">
         <label v-for="(item, index) in text.binary_message" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
       </div>
-      <div class="shifr_text d ">
-        <label v-for="(item, index) in text.encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
-      </div >
-      <div class="shifr_bit d bin">
-        <label v-for="(item, index) in text.binary_encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
-      </div >
     </div>
+    <div class="ans_row">
+      <div class="shifr_text d " v-bind:style="'--width:'+lw+'%'">
+        <label v-for="(item, index) in text.encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+      </div>
+      <div class="shifr_bit d bin" v-bind:style="'--width:'+lw+'%;--fs:'+rt+'rem;'">
+        <label v-for="(item, index) in text.binary_encode" @mouseenter="MO(index)" @mouseleave="MO(null)" v-bind:class="{ HOV: HOV(index)}"   :key="index">{{item}}</label>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    props:['text'],
+    props:['text', 'lw', 'rt'],
     name:'ans4div',
     components:{
     },
@@ -56,8 +60,8 @@ export default {
     transition: color 1s ease-out;
 }
 .bin label{
-  font-size: 1rem;
-  padding: 0.25rem;
+  font-size: calc(var(--fs));
+  padding: calc(var(--fs)/4);
 }
 .bin{
   padding: 0.25rem;
@@ -85,6 +89,15 @@ export default {
   overflow-x: hidden;
   padding-bottom: 30px;
   display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: center;
+}
+
+.ans_row{
+  width:100%;
+  overflow-x: hidden;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-content: flex-start;
@@ -100,7 +113,7 @@ export default {
 .ans .mes_text{
   padding: 0.25rem;
   height: 170px;
-  width: 30%;
+  width: calc(var(--width));
   margin: 0px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -113,7 +126,7 @@ export default {
 .ans .mes_bit{
   
   height: 170px;
-  width: 60%;
+  width: calc( 90% - var(--width));
   margin: 0px;
   margin-left: calc(-1*var(--border_width));
   
@@ -129,7 +142,7 @@ export default {
 .ans .shifr_text{
   padding: 0.25rem;
   height: 170px;
-  width: 30%;
+  width: calc(var(--width));
   margin: 0px;
   margin-top:calc(-1*var(--border_width));
   
@@ -145,7 +158,7 @@ export default {
   
   
   height: 170px;
-  width: 60%;
+  width: calc( 90% - var(--width));
   
   margin: 0px;
   margin-top:calc(-1*var(--border_width));

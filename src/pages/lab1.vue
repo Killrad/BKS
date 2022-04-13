@@ -25,7 +25,7 @@
           <formButton @click="clickButton" buttonText="Зашифровать"/>
         </div>
     </div>
-    <ans4div v-if="ans" :text="sometext"/>
+    <ans4div v-if="ans" lw="30" :rt="1" :text="sometext"/>
   </div>
 </template>
 
@@ -50,13 +50,13 @@ export default {
       sometext:{},
       ans: false,
       inputs:{
-        message:'',
-        A:'',
-        B:'',
-        Gamma:'',
-        e:'',
+        message:'Пример текста.',
+        A:'5',
+        B:'12',
+        Gamma:'п',
+        e:'43',
         asyncM : false,
-        T:''
+        T:'3'
       },
     }
   },
