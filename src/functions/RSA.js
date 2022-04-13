@@ -26,7 +26,6 @@ function RSA(params){
     let q;
     let t = [];
 
-    let i = 0;
     while(v[2] != 0) {
         q = parseInt(u[2] / v[2]);
         
@@ -35,7 +34,6 @@ function RSA(params){
         u = v.slice(0);
         v = t.slice(0);
         
-        i++
     }
     
     let kb = u[0] % phi_N;
