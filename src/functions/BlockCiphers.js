@@ -3,7 +3,7 @@ params = {message: исходное сообщение, key: массив из 8
 */
 
 function methods2(params){
-    let rezult = BlockCipher(message, input);
+    let rezult = BlockCipher(params);
     return rezult;
 }
 function BlockCipher(params){
@@ -26,13 +26,22 @@ function BlockCipher(params){
     let big_binary_mess = "";
 
     for(let i = 0; i < mess.length; i++){
-        binary_message.push(mess[i].charCodeAt(i).toString(2).padStart(8, '0'));
+        binary_message.push(mess[i].charCodeAt(i).toString(2).padStart(16, '0'));
         big_binary_mess = big_binary_mess + binary_message[i];
     }
 
-    for(let i = 0; i < 32; i++){
-
+    for(let i = 0; i < 64; i++){ //деление на блоки и на из правые и левые части
+        T.push({L: big_binary_mess.slice(i, i + 32), R: big_binary_mess.slice(32 + i, i + 64)});
     }
+    
+
+
+    return {message: mess, binary_message: binary_message};
+}
+function encoding_BC(){
+
+}
+function decoding_BC(){
 
 }
 function addition_2(a, b){
