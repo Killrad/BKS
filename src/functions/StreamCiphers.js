@@ -197,9 +197,6 @@ function description_nonGraphic_symbols(num){
     return rezult;
 }
 
-
-
-
 const methods1 = {
     Sync: SynchronousStreamCipher,
     Async: AsynchronousStreamCipher,
