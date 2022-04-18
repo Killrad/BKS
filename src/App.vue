@@ -2,6 +2,9 @@
   <router-link to="/">
       <button>Поточные шифры</button>
    </router-link>
+   <router-link to="/Block">
+      <button>Блочное шифрование</button>
+   </router-link>
    <router-link to="/RSA">
       <button>Ассиметричное шифрование</button>
    </router-link>

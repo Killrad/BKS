@@ -1,5 +1,6 @@
 import { createWebHashHistory, createRouter } from "vue-router";
 import lab1 from '../pages/lab1.vue'
+import lab2 from '../pages/lab2.vue'
 import lab3 from '../pages/lab3.vue'
 
 const routes = [
@@ -12,6 +13,11 @@ const routes = [
     path: "/RSA",
     name: "RSA",
     component: lab3,
+  },
+  {
+    path: "/Block",
+    name: "Block",
+    component: lab2,
   },
 ];
 
